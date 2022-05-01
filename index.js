@@ -43,19 +43,7 @@ module.exports = class Client extends EventEmitter {
         this.last = 'left.' + data.username
       }
     })
-
-    this.socket.on('admin.refreshall', (data) => {
-      this.emit('refreshed', data)
-    })
-
-    this.socket.on('admin.announcement', (data) => {
-      this.emit('announcenent', data)
-    })
-
-    this.socket.on('admin.announceAll', (data) => {
-      this.emit('announcenent', data)
-    })
-
+    
     this.socket.on('banned', () => {
       this.emit('error', {
         data: 'banned'

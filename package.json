@@ -1,6 +1,6 @@
 {
   "name": "replchat.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A library for making bots with replchat (https://replchat.vapwastaken.repl.co/)",
   "main": "index.js",
   "keywords": [
