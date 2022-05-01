@@ -12,5 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "socket.io-client": "^4.4.1"
+  },
+
+  "homepage": "https://github.com/AnyMinorDeerPanda/replchat.js#readme",
+  "repository": "github:AnyMinorDeerPanda/replchat.js",
+  "bugs": {
+    "url" : "https://github.com/AnyMinorDeerPanda/replchat.js/issues",
+    "email" : "contact@xtract.space"
   }
 }
