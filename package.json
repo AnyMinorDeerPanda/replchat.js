@@ -1,0 +1,16 @@
+{
+  "name": "replchat.js",
+  "version": "1.1.0",
+  "description": "A library for making bots with replchat (https://replchat.vapwastaken.repl.co/)",
+  "main": "index.js",
+  "keywords": [
+    "repl",
+    "chat",
+    "replit"
+  ],
+  "author": "Xtract",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io-client": "^4.4.1"
+  }
+}
