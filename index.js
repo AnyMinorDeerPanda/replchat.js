@@ -3,6 +3,7 @@ const io = require("socket.io-client");
 
 module.exports = class Client extends EventEmitter {
   constructor() {
+    // Construct Client
     super()
 
     this.socket = {}
@@ -10,11 +11,14 @@ module.exports = class Client extends EventEmitter {
     this.last = ""
   }
 
+  // Client Functions
   send(message) {
+    // Send Message to replchat
     this.socket.emit('chat message', { message })
   }
 
   login(auth) {
+    // Authenticate with replchat
     this.socket = io(`https://replchat.vapwastaken.repl.co/`, {
       transports: ["websocket"],
       extraHeaders: {
@@ -43,7 +47,7 @@ module.exports = class Client extends EventEmitter {
         this.last = 'left.' + data.username
       }
     })
-    
+
     this.socket.on('banned', () => {
       this.emit('error', {
         data: 'banned'
@@ -57,17 +61,28 @@ module.exports = class Client extends EventEmitter {
     })
 
     this.socket.on('chat message', (data) => {
-      this.emit('message', {
-        author: {
-          username: data.username,
-          avatar: data.pfp
-        },
-        content: data.message,
-        reply: (content) => {
-          var message = `Replying to @${data.username} (${data.message}): ${content}`
-          this.send(message)
-        }
-      })
+      var message = new Message(this, data)
+      this.emit('message', message)
     })
+  }
+}
+
+class Message {
+  constructor(client, data) {
+    // Construct Message
+    this.author = {
+      username: data.username,
+      avatar: data.pfp
+    }
+
+    this.content = data.message
+
+    this.client = client
+  }
+
+  // Message Functions
+  reply(content) {
+    var message = `Replying to @${this.author.username} (${this.content}): ${content}`
+    this.client.send(message)
   }
 }

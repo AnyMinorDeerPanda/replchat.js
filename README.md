@@ -62,13 +62,13 @@ bot.login('your-auth-token')
 ```
 
 ## Events
-Currently there are 10 events, they are as follows:
+Currently there are 6 events, they are as follows:
 - 'connected': called when the bot has connected
 - 'ready': called when the bot is connected and ready
 - 'message': called when a message is sent
 - 'left': called when a user leaves
 - 'joined': called when a user joins
-- 'refreshed': called when `admin.refreshall` is called
-- 'announcement': called when an announcement is made
 - 'error': used when an error occurs (such as the bot was banned or kicked)
-- 'debug': not currently used by replchat
+
+## Docs
+Documentation is coming soon! Util then, hold on while we work on it!
