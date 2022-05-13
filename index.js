@@ -2,10 +2,11 @@ const EventEmitter = require('events').EventEmitter
 const io = require("socket.io-client");
 
 module.exports = class Client extends EventEmitter {
-  constructor() {
+  constructor(username) {
     // Construct Client
     super()
 
+    this.username = username
     this.socket = {}
 
     this.last = ""
@@ -17,18 +18,26 @@ module.exports = class Client extends EventEmitter {
     this.socket.emit('chat message', { message })
   }
 
-  login(auth) {
+  login() {
     // Authenticate with replchat
-    this.socket = io(`https://replchat.vapwastaken.repl.co/`, {
+    this.socket = io(`https://replchat.bddy.repl.co/`, {
       transports: ["websocket"],
       extraHeaders: {
-        "Cookie": `REPL_AUTH=${auth}`
+        "X-Replit-User-Name": this.username
+        // "Cookie": `REPL_AUTH=${auth}`
       }
     });
 
     this.socket.on('connect', () => {
       this.emit('connected')
     });
+
+    this.socket.on('debug', (code) => {
+      if (code == "REQUIRES_IDENTIFY")
+        this.socket.emit('identify', `${this.username} [BOT]`)
+
+      this.emit('debug', code)
+    })
 
     this.socket.on('getmessages', () => {
       this.emit('ready')

@@ -7,9 +7,8 @@ replchat.js is a blazingly fast library for interacting with the replchat API
 # Installation
 `npm install replchat.js`
 
-You will need to get an auth token for your bot, a tutorial will be provided soon
-
-## ! WARNING ! Do NOT share your auth token with ANYONE
+replchat no longer requires an auth token! Instead, you now put your bots
+username in as a parameter when constructiong the class. (More details in examples)
 
 # Examples
 
@@ -17,20 +16,20 @@ Basic Bot:
 ```js
 const ReplBot = require('replbot.js')
 
-const bot = new ReplBot()
+const bot = new ReplBot("TestBot") // Replace "TestBot" with the name of your bot
 
 bot.on('ready', () => {
   console.log('Bot is logged in!')
 })
 
-bot.login('your-auth-token')
+bot.login()
 ```
 
 After this we can add a simple command system:
 ```js
 const ReplBot = require('replbot.js')
 
-const bot = new ReplBot()
+const bot = new ReplBot("TestBot") // Replace "TestBot" with the name of your bot
 
 const config = {
   prefix: '!'
@@ -58,7 +57,7 @@ bot.on('message', (message) => {
     message.reply(`Invalid Command! Use \`${config.prefix}help\` for a list of valid commands!`)
 })
 
-bot.login('your-auth-token')
+bot.login()
 ```
 
 ## Events
@@ -71,4 +70,4 @@ Currently there are 6 events, they are as follows:
 - 'error': used when an error occurs (such as the bot was banned or kicked)
 
 ## Docs
-Documentation is coming soon! Util then, hold on while we work on it!
+Documentation is coming soon! Until then, hold on while I work on it!
