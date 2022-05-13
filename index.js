@@ -24,7 +24,6 @@ module.exports = class Client extends EventEmitter {
       transports: ["websocket"],
       extraHeaders: {
         "X-Replit-User-Name": this.username
-        // "Cookie": `REPL_AUTH=${auth}`
       }
     });
 
@@ -33,10 +32,7 @@ module.exports = class Client extends EventEmitter {
     });
 
     this.socket.on('debug', (code) => {
-      if (code == "REQUIRES_IDENTIFY")
-        this.socket.emit('identify', `${this.username} [BOT]`)
-
-      this.emit('debug', code)
+      if (code != "REQUIRES_IDENTIFY") this.socket.emit('identify', `${this.username} [BOT]`)
     })
 
     this.socket.on('getmessages', () => {
@@ -45,14 +41,24 @@ module.exports = class Client extends EventEmitter {
 
     this.socket.on('joined', (data) => {
       if (this.last != 'joined.' + data.username) {
-        this.emit('join', data.username)
+        var user = {
+          username: data.username,
+          bot: data.username.endsWith('[BOT]')
+        }
+        this.emit('join', user)
+
         this.last = 'joined.' + data.username
       }
     })
 
     this.socket.on('left', (data) => {
       if (this.last != 'left.' + data.username) {
-        this.emit('left', data.username)
+        var user = {
+          username: data.username,
+          bot: data.username.endsWith('[BOT]')
+        }
+        this.emit('left', user)
+
         this.last = 'left.' + data.username
       }
     })
@@ -81,7 +87,8 @@ class Message {
     // Construct Message
     this.author = {
       username: data.username,
-      avatar: data.pfp
+      avatar: data.pfp,
+      bot: data.username.endsWith('[BOT]')
     }
 
     this.content = data.message

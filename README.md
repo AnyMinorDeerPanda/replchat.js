@@ -44,7 +44,7 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (message) => {
-  if (!message.content.startsWith(config.prefix)) return;
+  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
   var fullCommand = message.content.substr(config.prefix.length).split(" ")
   var command = fullCommand[0]
