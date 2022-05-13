@@ -32,7 +32,7 @@ module.exports = class Client extends EventEmitter {
     });
 
     this.socket.on('debug', (code) => {
-      if (code != "REQUIRES_IDENTIFY") this.socket.emit('identify', `${this.username} [BOT]`)
+      if (code == "REQUIRES_IDENTIFY") this.socket.emit('identify', `${this.username} [BOT]`)
     })
 
     this.socket.on('getmessages', () => {
