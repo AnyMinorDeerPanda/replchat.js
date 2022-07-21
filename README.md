@@ -1,16 +1,17 @@
-# About
+# replchat.js
+## About
 replchat.js is a blazingly fast library for interacting with the replchat API
  - Object-oriented
  - Lightweight
  - Fast
 
-# Installation
+## Installation
 `npm install replchat.js`
 
 replchat no longer requires an auth token! Instead, you now put your bots
 username in as a parameter when constructiong the class. (More details in examples)
 
-# Examples
+## Examples
 
 Basic Bot:
 ```js
